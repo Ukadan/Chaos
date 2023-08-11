@@ -13,9 +13,10 @@ struct TabBarView: View {
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        
         animation: .default)
     private var items: FetchedResults<Item>
-
+    @State private var isFavorite: Bool = false
     var body: some View {
         TabView {
             HomeView()
@@ -24,11 +25,13 @@ struct TabBarView: View {
                 }
             FavoriteView()
                 .tabItem {
-                    Label("Favorites", systemImage: "heart.fill")
+                    Label("Favorites", systemImage: "heart")
                 }
-            BasketView()
+
+            
+            SubmitView()
                 .tabItem {
-                    Label("Submit", systemImage: "cart.fill")
+                    Label("Submit", systemImage: "plus.square.fill")
                 }
             MessageView()
                 .tabItem {
@@ -41,6 +44,7 @@ struct TabBarView: View {
                 }
         }
         .accentColor(.black)
+        .background(Color.white)
     }
 }
 
@@ -55,19 +59,19 @@ struct pageOne: View {
 }
 
 // HomeView
-struct HomeView: View {
-    @State private var isPageOnePresented = false
-    
-    var body: some View {
-        NavigationView {
-            ZStack {
-                NavigationLink(destination: pageOne()) {
-                    Text("Open")
-                }
-            }
-        }
-    }
-}
+//struct HomeView: View {
+//    @State private var isPageOnePresented = false
+//    
+//    var body: some View {
+//        NavigationView {
+//            ZStack {
+//                NavigationLink(destination: pageOne()) {
+//                    Text("Open")
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 //Favorite
@@ -82,11 +86,11 @@ struct FavoriteView: View {
 }
 
 // BasketView
-struct BasketView: View {
+struct SubmitView: View {
     var body: some View {
         ZStack {
             Color.white
-            Text("Basket Screen")
+            Text("SubmitView Screen")
                 .foregroundColor(.black)
         }
     }
