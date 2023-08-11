@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CECC02D02A868F2D0056C56C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC02CF2A868F2D0056C56C /* HomeView.swift */; };
 		CED316A82A8665DA00174C4B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED316A72A8665DA00174C4B /* TabBarView.swift */; };
 		CEF510932A83D33F006BE96D /* ChaosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF510922A83D33E006BE96D /* ChaosApp.swift */; };
 		CEF510952A83D33F006BE96D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF510942A83D33F006BE96D /* ContentView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CECC02CF2A868F2D0056C56C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CED316A72A8665DA00174C4B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		CEF5108F2A83D33E006BE96D /* Chaos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chaos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF510922A83D33E006BE96D /* ChaosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaosApp.swift; sourceTree = "<group>"; };
@@ -77,9 +79,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CECC02CC2A868C3C0056C56C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CECC02CF2A868F2D0056C56C /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		CED316A52A86642B00174C4B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CECC02CC2A868C3C0056C56C /* Home */,
 				CED316A62A86644700174C4B /* Tab Bar */,
 			);
 			path = Views;
@@ -285,6 +296,7 @@
 				CEF5109F2A83D343006BE96D /* Chaos.xcdatamodeld in Sources */,
 				CEF5109C2A83D343006BE96D /* Persistence.swift in Sources */,
 				CEF510952A83D33F006BE96D /* ContentView.swift in Sources */,
+				CECC02D02A868F2D0056C56C /* HomeView.swift in Sources */,
 				CED316A82A8665DA00174C4B /* TabBarView.swift in Sources */,
 				CEF510932A83D33F006BE96D /* ChaosApp.swift in Sources */,
 			);
