@@ -15,7 +15,6 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
             VStack {
                 ScrollView(.vertical){
                     VStack {
@@ -39,36 +38,64 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .background(.white)
+                    .id(1)
+                    
                     
                     VStack(spacing: 1) {
-                        HStack(spacing: 1) {
-                            Rectangle()
-                                .frame(width: 104, height: 104)
-                            Rectangle()
-                                .frame(width: 104, height: 104)
-                            Rectangle()
-                                .frame(width: 104, height: 104)
-                            Rectangle()
-                                .frame(width: 104, height: 104)
+                        HStack(spacing: 0) {
+                            Button(action: {}) {
+                                Image(systemName: "car.side")
+                                Text("Cars")
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
+                            
+                            Button(action: {}) {
+                                Image(systemName: "bus.fill")
+                                    
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
+                            
+                            Button(action: {}) {
+                                Image(systemName: "cart")
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
+                            
+                            Button(action: {}) {
+                                Image(systemName: "car.window.left")
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
                         }
                         
                         HStack(spacing: 1) {
-                            Rectangle()
-                                .frame(width: 104, height: 104)
-                            Rectangle()
-                                .frame(width: 104, height: 104)
-                            Rectangle()
-                                .frame(width: 104, height: 104)
-                            Rectangle()
-                                .frame(width: 104, height: 104)
+                            Button(action: {}) {
+                                Image(systemName: "bus.fill")
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
+                            
+                            Button(action: {}) {
+                                Image(systemName: "car.side")
+                                    
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
+                            
+                            Button(action: {}) {
+                                Image(systemName: "car.side")
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
+                            
+                            Button(action: {}) {
+                                Image(systemName: "car.side")
+                            }
+                            .frame(width: 104, height: 104, alignment: .center)
                         }
                     }
+                    .background(.white)
+                    .cornerRadius(15)
                     
                     VStack {
-                        ForEach(1...4, id: \.self) { index in
-                            Rectangle()
-                                .frame(height: 300)
-                                .foregroundColor(.black)
+                        ForEach(1...20, id: \.self) { index in
+                            CardView()
                         }
                     }
                 }
@@ -81,7 +108,7 @@ struct HomeView: View {
                                         .foregroundColor(.blue)
                                 })
             .toolbarBackground(Color.white)
-        }
+            .background(Color(UIColor.systemGray5))
     }
 }
 
