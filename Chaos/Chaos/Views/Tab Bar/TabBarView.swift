@@ -10,41 +10,80 @@ import CoreData
 
 struct TabBarView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         
-        animation: .default)
+        animation: .linear)
+    
     private var items: FetchedResults<Item>
-    @State private var isFavorite: Bool = false
+    
+    @State private var tabSelection = 1
+    @State private var tappedTwice: Bool = false
+    
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Kolesa.kz", systemImage: "house.fill")
+        var handlear: Binding<Int> { Binding (
+            get: { self.tabSelection },
+            set: {
+                if $0 == self.tabSelection {
+                    tappedTwice = true
                 }
-            FavoriteView()
+                self.tabSelection = $0
+            }
+        )}
+        return ScrollViewReader { proxy in
+            TabView(selection: handlear) {
+                NavigationView {
+                    HomeView()
+                        .onChange(of: tappedTwice, perform: { tapped in
+                            if tapped {
+                                withAnimation {
+                                    proxy.scrollTo(1)
+                                }
+                                tappedTwice = false
+                            }
+                        })
+                }
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Kolesa.kz")
+                }
+                .tag(1)
+                
+                NavigationView {
+                    FavoriteView()
+                }
                 .tabItem {
                     Label("Favorites", systemImage: "heart")
                 }
-
-            
-            SubmitView()
-                .tabItem {
-                    Label("Submit", systemImage: "plus.square.fill")
-                }
-            MessageView()
-                .tabItem {
-                    Label("Messages", systemImage: "envelope.fill")
-                }
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.crop.circle.fill")
-                    
-                }
+                .tag(2)
+                
+                
+                
+                SubmitView()
+                    .tabItem {
+                        Label("Submit", systemImage: "plus.square.fill")
+                    }
+                    .tag(3)
+                
+                MessageView()
+                    .tabItem {
+                        Label("Messages", systemImage: "envelope.fill")
+                    }
+                    .tag(4)
+                
+                ProfileView()
+                    .tabItem {
+                        Label("Profile", systemImage: "person.crop.circle.fill")
+                        
+                    }
+                    .tag(5)
+            }
+            .onAppear() {
+                UITabBar.appearance().backgroundColor = .white
+            }
+            .accentColor(.black)
         }
-        .accentColor(.black)
-        .background(Color.white)
     }
 }
 
@@ -57,22 +96,6 @@ struct pageOne: View {
         }
     }
 }
-
-// HomeView
-//struct HomeView: View {
-//    @State private var isPageOnePresented = false
-//    
-//    var body: some View {
-//        NavigationView {
-//            ZStack {
-//                NavigationLink(destination: pageOne()) {
-//                    Text("Open")
-//                }
-//            }
-//        }
-//    }
-//}
-
 
 //Favorite
 struct FavoriteView: View {
@@ -115,5 +138,12 @@ struct ProfileView: View {
             Text("Profile Screen")
                 .foregroundColor(.white)
         }
+    }
+}
+
+
+struct TabBarView_Previews: PreviewProvider {
+    static var previews: some View {
+        TabBarView()
     }
 }
