@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE3877C82A88140F00F18853 /* CardBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3877C72A88140F00F18853 /* CardBundle.swift */; };
+		CE3877CA2A88458D00F18853 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3877C92A88458D00F18853 /* ProfileView.swift */; };
+		CE3877CC2A88522E00F18853 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3877CB2A88522E00F18853 /* SettingView.swift */; };
+		CE3877CF2A886BD900F18853 /* NavigationConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3877CE2A886BD900F18853 /* NavigationConfig.swift */; };
+		CE3877D42A895F4600F18853 /* StoryBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3877D32A895F4600F18853 /* StoryBundle.swift */; };
+		CE3877D82A896DEF00F18853 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3877D72A896DEF00F18853 /* StoryView.swift */; };
+		CE3877DE2A899B1200F18853 /* StoryDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3877DD2A899B1200F18853 /* StoryDesignView.swift */; };
 		CECC02D02A868F2D0056C56C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC02CF2A868F2D0056C56C /* HomeView.swift */; };
 		CED316A82A8665DA00174C4B /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED316A72A8665DA00174C4B /* TabBarView.swift */; };
+		CEE294012A87D755007D96A8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE294002A87D755007D96A8 /* CardView.swift */; };
 		CEF510932A83D33F006BE96D /* ChaosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF510922A83D33E006BE96D /* ChaosApp.swift */; };
 		CEF510952A83D33F006BE96D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF510942A83D33F006BE96D /* ContentView.swift */; };
 		CEF510972A83D343006BE96D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF510962A83D343006BE96D /* Assets.xcassets */; };
@@ -38,8 +46,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE3877C72A88140F00F18853 /* CardBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBundle.swift; sourceTree = "<group>"; };
+		CE3877C92A88458D00F18853 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CE3877CB2A88522E00F18853 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		CE3877CE2A886BD900F18853 /* NavigationConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfig.swift; sourceTree = "<group>"; };
+		CE3877D32A895F4600F18853 /* StoryBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBundle.swift; sourceTree = "<group>"; };
+		CE3877D72A896DEF00F18853 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		CE3877DD2A899B1200F18853 /* StoryDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDesignView.swift; sourceTree = "<group>"; };
 		CECC02CF2A868F2D0056C56C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CED316A72A8665DA00174C4B /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		CEE294002A87D755007D96A8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CEF5108F2A83D33E006BE96D /* Chaos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chaos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF510922A83D33E006BE96D /* ChaosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaosApp.swift; sourceTree = "<group>"; };
 		CEF510942A83D33F006BE96D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +95,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE3877C62A88134C00F18853 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE7869F02A8AAA60009B32D5 /* Card */,
+				CE3877D22A895F0A00F18853 /* Story */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CE3877CD2A886BA700F18853 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CE3877CE2A886BD900F18853 /* NavigationConfig.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		CE3877D22A895F0A00F18853 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				CE3877D32A895F4600F18853 /* StoryBundle.swift */,
+			);
+			path = Story;
+			sourceTree = "<group>";
+		};
+		CE3877D92A8991CD00F18853 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				CE3877D72A896DEF00F18853 /* StoryView.swift */,
+				CE3877DD2A899B1200F18853 /* StoryDesignView.swift */,
+			);
+			path = Story;
+			sourceTree = "<group>";
+		};
+		CE3877DA2A8991EA00F18853 /* CardAd */ = {
+			isa = PBXGroup;
+			children = (
+				CEE294002A87D755007D96A8 /* CardView.swift */,
+			);
+			path = CardAd;
+			sourceTree = "<group>";
+		};
+		CE3877DB2A8991FD00F18853 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE3877DC2A89920E00F18853 /* Settings */,
+				CE3877C92A88458D00F18853 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CE3877DC2A89920E00F18853 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CE3877CB2A88522E00F18853 /* SettingView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CE7869F02A8AAA60009B32D5 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				CE3877C72A88140F00F18853 /* CardBundle.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		CECC02CC2A868C3C0056C56C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +173,9 @@
 		CED316A52A86642B00174C4B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE3877DB2A8991FD00F18853 /* Profile */,
+				CE3877DA2A8991EA00F18853 /* CardAd */,
+				CE3877D92A8991CD00F18853 /* Story */,
 				CECC02CC2A868C3C0056C56C /* Home */,
 				CED316A62A86644700174C4B /* Tab Bar */,
 			);
@@ -127,6 +213,8 @@
 		CEF510912A83D33E006BE96D /* Chaos */ = {
 			isa = PBXGroup;
 			children = (
+				CE3877CD2A886BA700F18853 /* Helper */,
+				CE3877C62A88134C00F18853 /* Model */,
 				CED316A52A86642B00174C4B /* Views */,
 				CEF510922A83D33E006BE96D /* ChaosApp.swift */,
 				CEF510942A83D33F006BE96D /* ContentView.swift */,
@@ -293,9 +381,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE294012A87D755007D96A8 /* CardView.swift in Sources */,
+				CE3877CC2A88522E00F18853 /* SettingView.swift in Sources */,
+				CE3877CA2A88458D00F18853 /* ProfileView.swift in Sources */,
+				CE3877D42A895F4600F18853 /* StoryBundle.swift in Sources */,
 				CEF5109F2A83D343006BE96D /* Chaos.xcdatamodeld in Sources */,
 				CEF5109C2A83D343006BE96D /* Persistence.swift in Sources */,
+				CE3877DE2A899B1200F18853 /* StoryDesignView.swift in Sources */,
 				CEF510952A83D33F006BE96D /* ContentView.swift in Sources */,
+				CE3877D82A896DEF00F18853 /* StoryView.swift in Sources */,
+				CE3877C82A88140F00F18853 /* CardBundle.swift in Sources */,
+				CE3877CF2A886BD900F18853 /* NavigationConfig.swift in Sources */,
 				CECC02D02A868F2D0056C56C /* HomeView.swift in Sources */,
 				CED316A82A8665DA00174C4B /* TabBarView.swift in Sources */,
 				CEF510932A83D33F006BE96D /* ChaosApp.swift in Sources */,

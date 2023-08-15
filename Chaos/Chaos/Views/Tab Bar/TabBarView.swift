@@ -18,8 +18,11 @@ struct TabBarView: View {
     
     private var items: FetchedResults<Item>
     
+    @StateObject var storyData = StoryViewModel()
+    
     @State private var tabSelection = 1
     @State private var tappedTwice: Bool = false
+    @State private var scrolling: Bool = false
     
     var body: some View {
         var handlear: Binding<Int> { Binding (
@@ -33,22 +36,21 @@ struct TabBarView: View {
         )}
         return ScrollViewReader { proxy in
             TabView(selection: handlear) {
-                NavigationView {
-                    HomeView()
-                        .onChange(of: tappedTwice, perform: { tapped in
-                            if tapped {
-                                withAnimation {
-                                    proxy.scrollTo(1)
-                                }
-                                tappedTwice = false
+                
+                HomeView()
+                    .onChange(of: tappedTwice, perform: { tapped in
+                        if tapped {
+                            withAnimation {
+                                proxy.scrollTo(1)
                             }
-                        })
-                }
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Kolesa.kz")
-                }
-                .tag(1)
+                            tappedTwice = false
+                        }
+                    })
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                        Text("Kolesa.kz")
+                    }
+                    .tag(1)
                 
                 NavigationView {
                     FavoriteView()
@@ -72,16 +74,21 @@ struct TabBarView: View {
                     }
                     .tag(4)
                 
-                ProfileView()
+                NavigationView {
+                    ProfileView()
+                }
                     .tabItem {
                         Label("Profile", systemImage: "person.crop.circle.fill")
                         
                     }
                     .tag(5)
             }
-            .onAppear() {
-                UITabBar.appearance().backgroundColor = .white
-            }
+            .onAppear {
+                        let appearance = UITabBarAppearance()
+                        appearance.configureWithOpaqueBackground()
+                        appearance.backgroundColor = .white // Set the tab bar background color
+                        UITabBar.appearance().standardAppearance = appearance
+                    }
             .accentColor(.black)
         }
     }
@@ -130,16 +137,6 @@ struct MessageView: View {
     }
 }
 
-// ProfileView
-struct ProfileView: View {
-    var body: some View {
-        ZStack {
-            Color.blue
-            Text("Profile Screen")
-                .foregroundColor(.white)
-        }
-    }
-}
 
 
 struct TabBarView_Previews: PreviewProvider {
