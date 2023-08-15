@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "IMG_9586.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "logoKolesa.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
