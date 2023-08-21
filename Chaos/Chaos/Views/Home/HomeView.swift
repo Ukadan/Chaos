@@ -15,7 +15,7 @@ struct ButtonData: Identifiable, Hashable {
 }
 
 struct HomeView: View {
-
+    
     let buttonsData: [ButtonData] = [
             ButtonData(imageName: "car.side", title: "Cars", shotTitle: "cars"),
             ButtonData(imageName: "car.2", title: "Cars by Kolesa.kz", shotTitle: "carsByKolesa"),
@@ -33,23 +33,31 @@ struct HomeView: View {
     
     @StateObject var cardData = CardViewModel()
     @StateObject var storyData = StoryViewModel()
+    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
         NavigationView {
             VStack {
                 ScrollView(.vertical){
-                    VStack {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack(spacing: 8) {
-                                ForEach($storyData.stories) { $bundle in
-                                    StoryDesignView(bundle: $bundle)
-                                        .environmentObject(storyData)
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(settings.darkMode ? .black : .white)
+                            .frame(width: .infinity, height: 114)
+                            .padding(.top, -4)
+                        
+                        VStack {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHStack(spacing: 8) {
+                                    ForEach($storyData.stories) { $bundle in
+                                        StoryDesignView(bundle: $bundle)
+                                            .environmentObject(storyData)
+                                    }
                                 }
+                                .padding(.leading, 2)
                             }
-                            .padding(.leading, 2)
                         }
+                        .padding(.bottom, 5)
                     }
-                    .padding(.bottom, 5)
                     .id(1)
                     
                     
@@ -57,29 +65,29 @@ struct HomeView: View {
                         ForEach(buttonsData, id: \.self) { buttons in
                             NavigationLink(destination: destinationForButton(buttons), label:  {
                                 VStack {
-                                    ZStack {
+                                    ZStack(alignment: .center) {
                                         Rectangle()
-                                            .foregroundColor(Color(.white))
+                                            .foregroundColor(Color(settings.darkMode ? .black : .white))
                                             .frame(width: 100, height: 100)
                                             .cornerRadius(10)
                                            
                                         
-                                        VStack(spacing: 10) {
+                                        VStack(alignment: .center, spacing: 10) {
                                             Image(systemName: "\(buttons.imageName)")
-                                                .resizable()
-                                                .frame(width: 20, height: 14, alignment: .bottom)
-                                                .foregroundColor(.blue)
-                                            
+                                                .foregroundColor(settings.darkMode ? .white : .blue)
+                                                
                                             Text(buttons.title)
-                                                .frame(width: 86)
+                                                .frame(width: 86, alignment: .top)
                                                 .font(.system(size: 10, weight: .regular))
-                                                .foregroundColor(.black)
+                                                .foregroundColor(settings.darkMode ? .white : .black)
                                                 .multilineTextAlignment(.center)
                                         }
                                     }
                                 }
                             })
-                            .padding(.top, -8)
+                            .buttonStyle(ThemeAnimationStyle())
+                            .animation(.easeIn)
+                            .padding(.top, -6)
                         }
                     }
                     .padding(.leading, 6)
@@ -87,32 +95,37 @@ struct HomeView: View {
                     
                     
                     VStack {
-//                        ForEach(1...20, id: \.self) { index in
-//                            CardView()
-//                                .environmentObject(cardData)
-//                        }
                         ForEach($cardData.cardsAd) { $bundle in
-                            CardView(bundle: $bundle)
-                                .environmentObject(storyData)
+//                            NavigationLink(destination: {}, label:  {
+                                CardView(bundle: $bundle)
+                                    .environmentObject(storyData)
+//                            })
+//                            .buttonStyle(ThemeAnimationStyle())
                         }
                     }
                 }
             }
             .navigationBarItems(
-                leading: Image("logoKolesa")
+                leading: Image(settings.darkMode ? "logoKolesaWhite" : "logoKolesa")
                             .resizable()
                             .frame(width: 100, height: 22, alignment: .leading),
-                trailing: NavigationLink(destination: Text("News")) {
+                trailing: NavigationLink(destination: Text("News"))
+                {
                     Text("News")
-                        .foregroundColor(.blue)
+                        .font(.system(size: 16, weight: settings.darkMode ? .bold : .regular))
+                        .foregroundColor(settings.darkMode ? .white : .blue)
             })
             .background(Color(UIColor.systemGray5))
+            .toolbarBackground(settings.darkMode ? .black : .white, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar(.visible, for: .tabBar)
+            .toolbarBackground(settings.darkMode ? Color.black : Color.white, for: .tabBar)
         }
         .overlay(
             StoryView()
                 .environmentObject(storyData)
         )
-    }
+}
     
     
 func destinationForButton(_ button: ButtonData) -> some View {
@@ -241,4 +254,11 @@ struct KolesaGuideView: View {
       private func formatTime(hours: Int, minutes: Int, seconds: Int) -> String {
           return String(format: "%02d h | %02d m | %02d s", hours, minutes, seconds)
       }
+}
+
+struct ThemeAnimationStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.94 : 1.0) //<- change scale value as per need. scaleEffect(configuration.isPressed ? 1.2 : 1.0)
+    }
 }

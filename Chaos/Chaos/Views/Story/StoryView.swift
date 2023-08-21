@@ -35,7 +35,7 @@ struct StoryCardView: View {
     
     @Binding var bundle: StoryBundle
     @EnvironmentObject var storyData: StoryViewModel
-    
+    @EnvironmentObject var settings: AppSettings
     @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     @State var timerProgress: CGFloat = 0
     
@@ -100,7 +100,7 @@ struct StoryCardView: View {
                                         .foregroundColor(.blue)
                                     
                                     Text("\(bundle.dislikeCount)")
-                                        .foregroundColor(Color(UIColor.darkGray))
+                                        .foregroundColor(settings.darkMode ? (bundle.selectingReactionButton == 0 ? .black : .white) : Color(UIColor.darkGray))
                                 }
                             }
                             .frame(width: 80, height: 40)
@@ -129,7 +129,7 @@ struct StoryCardView: View {
                                         .foregroundColor(.blue)
                                     
                                     Text("\(bundle.likeCount)")
-                                        .foregroundColor(Color(UIColor.darkGray))
+                                        .foregroundColor(settings.darkMode ? (bundle.selectingReactionButton == 1 ? .black : .white) : Color(UIColor.darkGray))
                                 }
                                 .frame(width: 80, height: 40)
                                 .background(bundle.selectingReactionButton == 1 ? Color.white : Color(UIColor.systemGray2))
@@ -167,8 +167,6 @@ struct StoryCardView: View {
                         GeometryReader { proxy in
                             
                             let width = proxy.size.width
-                            
-                            
                             let progress = timerProgress - CGFloat(index)
                             let perfectProgress = min(max(progress, 0), 1)
                             

@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import UIKit
 import CoreData
 
 struct TabBarView: View {
+ 
+
     @Environment(\.managedObjectContext) private var viewContext
-    
+
+    @EnvironmentObject var settings: AppSettings
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         
@@ -35,61 +39,56 @@ struct TabBarView: View {
             }
         )}
         return ScrollViewReader { proxy in
-            TabView(selection: handlear) {
-                
-                HomeView()
-                    .onChange(of: tappedTwice, perform: { tapped in
-                        if tapped {
-                            withAnimation {
-                                proxy.scrollTo(1)
+            ZStack(alignment: .bottom) {
+                TabView(selection: handlear) {
+                    HomeView()
+                        .onChange(of: tappedTwice, perform: { tapped in
+                            if tapped {
+                                withAnimation {
+                                    proxy.scrollTo(1)
+                                }
+                                tappedTwice = false
                             }
-                            tappedTwice = false
+                        })
+                        .tabItem {
+                            Image(systemName: "house.fill")
+                            Text("Kolesa.kz")
                         }
-                    })
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Kolesa.kz")
+                        .tag(1)
+                    
+                    NavigationView {
+                        FavoriteView()
                     }
-                    .tag(1)
-                
-                NavigationView {
-                    FavoriteView()
-                }
-                .tabItem {
-                    Label("Favorites", systemImage: "heart")
-                }
-                .tag(2)
-                
-                
-                
-                SubmitView()
                     .tabItem {
-                        Label("Submit", systemImage: "plus.square.fill")
+                        Label("Favorites", systemImage: "heart")
                     }
-                    .tag(3)
-                
-                MessageView()
-                    .tabItem {
-                        Label("Messages", systemImage: "envelope.fill")
-                    }
-                    .tag(4)
-                
-                NavigationView {
+                    .tag(2)
+                    
+                    
+                    
+                    SubmitView()
+                        .tabItem {
+                            Label("Submit", systemImage: "plus.square.fill")
+                                .background(.red)
+                        }
+                        .tag(3)
+                    
+                    MessageView()
+                        .tabItem {
+                            Label("Messages", systemImage: "envelope.fill")
+                        }
+                        .tag(4)
+                    
+                    
                     ProfileView()
+                        .tabItem {
+                            Label("Profile", systemImage: "person.crop.circle.fill")
+                        }
+                        .tag(5)
                 }
-                    .tabItem {
-                        Label("Profile", systemImage: "person.crop.circle.fill")
-                        
-                    }
-                    .tag(5)
+                .accentColor(settings.darkMode ? .white : .black)
+                
             }
-            .onAppear {
-                        let appearance = UITabBarAppearance()
-                        appearance.configureWithOpaqueBackground()
-                        appearance.backgroundColor = .white // Set the tab bar background color
-                        UITabBar.appearance().standardAppearance = appearance
-                    }
-            .accentColor(.black)
         }
     }
 }
@@ -100,6 +99,7 @@ struct pageOne: View {
             Color.red
             Text("Moldir zhopa!!")
                 .foregroundColor(.white)
+        
         }
     }
 }
@@ -111,17 +111,35 @@ struct FavoriteView: View {
             Color.green
             Text("Favorite Screen")
                 .foregroundColor(.green)
+        
         }
     }
 }
 
 // BasketView
 struct SubmitView: View {
+    
+    func stateApp() -> Bool {
+        
+        if UIApplication.shared.windows.first?.rootViewController?.view.overrideUserInterfaceStyle == .dark {
+            return true
+        }
+        
+        else {
+            return false
+        }
+    }
+    
     var body: some View {
         ZStack {
-            Color.white
-            Text("SubmitView Screen")
-                .foregroundColor(.black)
+//            Color.white
+//            Text("SubmitView Screen")
+//                .foregroundColor(.black)
+            if stateApp() == true {
+                Color.red
+            } else {
+                Color.yellow
+            }
         }
     }
 }
@@ -139,7 +157,7 @@ struct MessageView: View {
 
 
 
-struct TabBarView_Previews: PreviewProvider {
+struct TabBarView_Previews: PreviewProvider {    
     static var previews: some View {
         TabBarView()
     }

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct StoryDesignView: View {
     
-@Binding var bundle : StoryBundle
-@Environment(\.colorScheme) var scheme
-@EnvironmentObject var storyDate: StoryViewModel
+    @Binding var bundle : StoryBundle
+    @Environment(\.colorScheme) var scheme
+    @EnvironmentObject var storyDate: StoryViewModel
+    @EnvironmentObject var setttng: AppSettings
     
 var body: some View {
     Image(bundle.profileImage)
@@ -22,6 +23,13 @@ var body: some View {
         .cornerRadius(6)
         .background( scheme == .dark ? .black : .white, in: Rectangle())
         .overlay(
+            Rectangle()
+                .cornerRadius(6)
+                .foregroundColor(.black)
+                .frame(width: 97, height: 97)
+                .opacity(setttng.darkMode ? 0.2 : 0.0)
+        )
+        .overlay(
             RoundedRectangle(cornerRadius: 6)
                 .stroke(Color.white, lineWidth: 4)
                 .frame(width: 98, height: 98)
@@ -31,7 +39,7 @@ var body: some View {
             RoundedRectangle(cornerRadius: 6)
                 .stroke(
                     LinearGradient(
-                        colors: [.red,.blue],
+                        colors: [setttng.darkMode ? .green : .red,.blue],
                         startPoint: .top,
                         endPoint: .bottom),
                         lineWidth: 4)

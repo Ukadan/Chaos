@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ProfileView: View {
     @State private var phoneNumber: String = ""
+    @EnvironmentObject var settings: AppSettings
     
     var body: some View {
+        NavigationView {
             VStack {
                 VStack(alignment: .center, spacing: 1) {
-                    Image("logoKolesa")
+                    Image(settings.darkMode ? "logoKolesaWhite" : "logoKolesa")
                         .resizable()
                         .frame(width: 150, height: 30)
                     
@@ -35,18 +37,19 @@ struct ProfileView: View {
                         }
                         .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20))
                     }
-
+                    
                 }
                 Spacer()
             }
             .navigationBarItems(leading: Text("My profile")
-                                    .font(.system(size: 20, weight: .medium)),
+                .font(.system(size: 20, weight: .medium)),
                                 trailing: NavigationLink(destination: SettingView()) {
-                                    Image(systemName: "gearshape")
-                                        .resizable()
-                                        .foregroundColor(.blue)
-                                        .frame(width: 25, height: 25)
-                                })
+                Image(systemName: "gearshape")
+                    .resizable()
+                    .foregroundColor(.blue)
+                    .frame(width: 25, height: 25)
+            })
+        }
             
     }
 }
